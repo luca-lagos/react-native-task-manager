@@ -1,10 +1,15 @@
 import { View, Pressable, Text, StyleSheet, Switch } from "react-native";
 
-const CardTaskList = ({ item, onHandleModalDelete, updateTaskCompleted }) => {
+const CardTaskList = ({
+  item,
+  onHandleModalDelete,
+  updateTaskCompleted,
+  onSelectId
+}) => {
   return (
     <View
       style={styles.listItem}
-      backgroundColor={item.completed == false ? "#CECECF" : "#549479"}
+      backgroundColor={item.completed === false ? "#CECECF" : "#549479"}
       key={item.id}
     >
       <View
@@ -28,8 +33,8 @@ const CardTaskList = ({ item, onHandleModalDelete, updateTaskCompleted }) => {
         }}
       >
         <Switch
-          trackColor={item.completed == false ? "#767577" : "#81b0ff"}
-          thumbColor={item.completed == true ? "#f5dd4b" : "#f4f3f4"}
+          trackColor={item.completed === false ? "#767577" : "#81b0ff"}
+          thumbColor={item.completed === true ? "#f5dd4b" : "#f4f3f4"}
           onValueChange={() => {
             updateTaskCompleted(item.id);
           }}
@@ -39,7 +44,7 @@ const CardTaskList = ({ item, onHandleModalDelete, updateTaskCompleted }) => {
           style={styles.listButton}
           onPress={() => {
             onHandleModalDelete(true);
-            setIdSelected(item.id);
+            onSelectId(item.id);
           }}
         >
           <Text style={styles.listButtonText}>-</Text>

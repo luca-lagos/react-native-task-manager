@@ -9,6 +9,7 @@ const App = () => {
   const [taskList, setTaskList] = useState([]);
   const [idSelected, setIdSelected] = useState(null);
   const [taskTitle, setTaskTitle] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
   const [taskDescription, setTaskDescription] = useState(null);
   const [modalATVisible, setModalATVisible] = useState(false);
   const [modalDTVisible, setModalDTVisible] = useState(false);
@@ -17,13 +18,10 @@ const App = () => {
   const addTask = () => {
     const newTask = {
       id: uuid.v4(),
-      createAt: new Date().toLocaleString(),
-      updateAt: new Date().toLocaleString(),
       completed: false,
       title: taskTitle,
       description: taskDescription,
     };
-    console.log(newTask);
     setTaskList([...taskList, newTask]);
     setTaskTitle(null);
     setTaskDescription(null);
@@ -40,12 +38,18 @@ const App = () => {
     console.log(id);
     setTaskList(
       taskList.map((task) => {
-        if (task.id === id)
-          return { ...task, ...{ completed: !task.completed } };
+        if (task.id === id) {
+          task.completed = !task.completed;
+        }
+        return task;
       })
     );
     console.log(taskList);
-    setTaskCompleted(!taskCompleted);
+    setTaskCompleted(taskCompleted => !taskCompleted);
+  };
+
+  const onSelectId = (id) => {
+    setIdSelected(id);
   };
 
   const onHandleTitle = (t) => {
@@ -60,14 +64,26 @@ const App = () => {
     setModalATVisible(value);
     setTaskTitle(null);
     setTaskDescription(null);
-    console.log(modalATVisible);
   };
 
   const onHandleModalDelete = (value) => {
     setModalDTVisible(value);
   };
 
-  onSearchTask = (task) => {};
+  onHandleSearchTask = (e) => {
+    setSearchQuery(e);
+    console.log(searchQuery);
+    /*let results = [];
+    if (!searchQuery) {
+      results = taskList;
+    } else {
+      results = taskList.filter(
+        (task) =>
+          task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          task.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }*/
+  };
 
   return (
     <View style={styles.container}>
@@ -76,6 +92,11 @@ const App = () => {
           style={styles.searchTextInput}
           placeholder="Search task..."
           type="text"
+          clearButtonMode="always"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={searchQuery}
+          onChangeText={onHandleSearchTask}
         />
         <Pressable
           style={styles.searchButton}
@@ -90,6 +111,7 @@ const App = () => {
         taskList={taskList}
         onHandleModalDelete={onHandleModalDelete}
         updateTaskCompleted={updateTaskCompleted}
+        onSelectId={onSelectId}
       />
       <ModalAddTask
         modalATVisible={modalATVisible}

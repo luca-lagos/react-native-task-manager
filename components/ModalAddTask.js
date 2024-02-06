@@ -16,46 +16,45 @@ const ModalAddTask = ({
   onHandleModalAdd,
   addTask,
 }) => {
-  <Modal
-    animationType="slide"
-    visible={modalATVisible}
-  >
-    <View style={styles.modalPanel}>
-      <Text style={styles.modalTitle}>ADD TASK</Text>
-      <TextInput
-        style={styles.modalTextInput}
-        placeholder="Title"
-        type="text"
-        value={taskTitle}
-        onChangeText={onHandleTitle}
-      />
-      <TextInput
-        style={styles.modalTextInput}
-        placeholder="Description"
-        type="text"
-        value={taskDescription}
-        onChangeText={onHandleDescription}
-      />
-      <View style={styles.modalButtonGroup}>
-        <Pressable
-          style={styles.modalButton}
-          backgroundColor={"#A93C46"}
-          onPress={() => {
-            onHandleModalAdd(false);
-          }}
-        >
-          <Text style={styles.modalButtonText}>CANCEL</Text>
-        </Pressable>
-        <Pressable
-          style={styles.modalButton}
-          backgroundColor={"#2E64E1"}
-          onPress={addTask}
-        >
-          <Text style={styles.modalButtonText}>ADD</Text>
-        </Pressable>
+  return (
+    <Modal animationType="slide" visible={modalATVisible}>
+      <View style={styles.modalPanel}>
+        <Text style={styles.modalTitle}>ADD TASK</Text>
+        <TextInput
+          style={styles.modalTextInput}
+          placeholder="Title"
+          type="text"
+          value={taskTitle}
+          onChangeText={onHandleTitle}
+        />
+        <TextInput
+          style={styles.modalTextInput}
+          placeholder="Description"
+          type="text"
+          value={taskDescription}
+          onChangeText={onHandleDescription}
+        />
+        <View style={styles.modalButtonGroup}>
+          <Pressable
+            style={styles.modalButton}
+            backgroundColor={"#A93C46"}
+            onPress={() => {
+              onHandleModalAdd(false);
+            }}
+          >
+            <Text style={styles.modalButtonText}>CANCEL</Text>
+          </Pressable>
+          <Pressable
+            style={styles.modalButton}
+            backgroundColor={"#2E64E1"}
+            onPress={addTask}
+          >
+            <Text style={styles.modalButtonText}>ADD</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
-  </Modal>;
+    </Modal>
+  );
 };
 
 const styles = StyleSheet.create({

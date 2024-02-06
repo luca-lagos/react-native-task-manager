@@ -7,32 +7,34 @@ import {
   } from "react-native";
 
 const ModalDeleteTask = ({modalDTVisible, deleteTask, onHandleModalDelete}) => {
+ return(
   <Modal
-    animationType="slide"
-    visible={modalDTVisible}
-  >
-    <View style={styles.modalPanel}>
-      <Text style={styles.modalTitle} fontSize={16} width={300}>
-        Are you sure to delete this task?
-      </Text>
-      <View style={styles.modalButtonGroup}>
-        <Pressable
-          style={styles.modalButton}
-          onPress={() => onHandleModalDelete(false)}
-          backgroundColor={"#515151"}
-        >
-          <Text style={styles.modalButtonText}>CANCEL</Text>
-        </Pressable>
-        <Pressable
-          style={styles.modalButton}
-          backgroundColor={"#A93C46"}
-          onPress={deleteTask}
-        >
-          <Text style={styles.modalButtonText}>CONFIRM</Text>
-        </Pressable>
-      </View>
+  animationType="slide"
+  visible={modalDTVisible}
+>
+  <View style={styles.modalPanel}>
+    <Text style={styles.modalTitle} fontSize={16} width={300}>
+      Are you sure to delete this task?
+    </Text>
+    <View style={styles.modalButtonGroup}>
+      <Pressable
+        style={styles.modalButton}
+        onPress={() => onHandleModalDelete(false)}
+        backgroundColor={"#515151"}
+      >
+        <Text style={styles.modalButtonText}>CANCEL</Text>
+      </Pressable>
+      <Pressable
+        style={styles.modalButton}
+        backgroundColor={"#A93C46"}
+        onPress={deleteTask}
+      >
+        <Text style={styles.modalButtonText}>CONFIRM</Text>
+      </Pressable>
     </View>
-  </Modal>;
+  </View>
+</Modal>
+ )
 };
 
 const styles = StyleSheet.create({
